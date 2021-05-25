@@ -1,6 +1,6 @@
 # Autostarter
 
-[![GoDoc](https://godoc.org/github.com/danieloliveira085/Autostarter?status.svg)](https://godoc.org/github.com/danieloliveira085/Autostarter) [![license](https://img.shields.io/github/license/danieloliveira085/Autostarter.svg?style=flat)]() 
+[![GoDoc](https://godoc.org/github.com/danieloliveira085/Autostarter?status.svg)](https://godoc.org/github.com/danieloliveira085/Autostarter) [![license](https://img.shields.io/github/license/danieloliveira085/Autostarter.svg?style=flat)](https://github.com/danieloliveira085/Autostarter/blob/main/LICENSE) 
   
 Autostarter is a Go library that creates a shortcut to run automatically at startup and supports cross-compilation between Windows and Linux 
 
