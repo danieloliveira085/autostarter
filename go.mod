@@ -1,4 +1,4 @@
-module autostarter
+module github.com/danieloliveira085/Autostarter
 
 go 1.16
 
