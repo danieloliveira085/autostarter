@@ -24,7 +24,7 @@ type Shortcut struct {
 	Exec string
 	// The arguments for executable, can be empty
 	Args []string
-	// The directory where the executable starts
+	// The directory where the executable starts, if empty, the root of the executable will be defined as directory
 	StartIn string
 }
 
@@ -46,9 +46,13 @@ func SetIcon(path string) (icon, error) {
 // The startup with system is disabled by default, use Enable() to enable it
 // or use IsEnabled () to check if this autostart has been enabled previously
 func NewAutostart(sc Shortcut, ic icon) *Autostart {
+	if sc.StartIn == "" {
+		sc.StartIn = filepath.Dir(sc.Exec)
+	}
 	return &Autostart{
-		sc: sc,
-		ic: ic,
+		sc:   sc,
+		ic:   ic,
+		path: getShortcutPath(sc.Name),
 	}
 }
 
@@ -62,8 +66,7 @@ func (a *Autostart) IsEnabled() bool {
 
 // Enable the autostart
 func (a *Autostart) Enable() error {
-	var err error
-	a.path, err = createShortcut(a.sc, a.ic)
+	err := createShortcut(a.sc, a.ic)
 	if err != nil {
 		return err
 	}
@@ -76,6 +79,7 @@ func (a *Autostart) Disable() error {
 }
 
 // If autostart is enabled, it deactivates and vice versa
+// This return the state of autostart after the trigger
 func (a *Autostart) Trigger() bool {
 	if _, err := os.Stat(a.path); !os.IsNotExist(err) {
 		a.Disable()
@@ -91,4 +95,8 @@ func (s *Shortcut) getArgsString() string {
 		args = append(args, strconv.Quote(s.Args[i]))
 	}
 	return strings.Join(args, " ")
+}
+
+func getShortcutPath(shortcutName string) string {
+	return filepath.Join(getStartupDir(), shortcutName+shortcutExt)
 }

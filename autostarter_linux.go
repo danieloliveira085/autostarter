@@ -47,11 +47,10 @@ func checkIcon(path string) error {
 	return nil
 }
 
-func createShortcut(sc Shortcut, ic icon) (path string, err error) {
+func createShortcut(sc Shortcut, ic icon) (err error) {
 	var exec string
 	t := template.Must(template.New("shortcut").Parse(shortcutTemplate))
-	path = filepath.Join(getStartupDir(), sc.Name+shortcutExt)
-	f, err := os.Create(path)
+	f, err := os.Create(filepath.Join(getStartupDir(), sc.Name+shortcutExt))
 	if err != nil {
 		return
 	}

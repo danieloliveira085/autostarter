@@ -56,11 +56,10 @@ func checkIcon(path string) error {
 	return nil
 }
 
-func createShortcut(sc Shortcut, ic icon) (path string, err error) {
+func createShortcut(sc Shortcut, ic icon) (err error) {
 	object := newShellObject()
 	defer object.release()
-	path = filepath.Join(getStartupDir(), sc.Name+shortcutExt)
-	cs, err := oleutil.CallMethod(object.wShell, "CreateShortcut", path)
+	cs, err := oleutil.CallMethod(object.wShell, "CreateShortcut", filepath.Join(getStartupDir(), sc.Name+shortcutExt))
 	if err != nil {
 		return
 	}

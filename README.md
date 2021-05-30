@@ -1,6 +1,7 @@
 # Autostarter
 
-[![GoDoc](https://godoc.org/github.com/danieloliveira085/autostarter?status.svg)](https://godoc.org/github.com/danieloliveira085/autostarter) [![license](https://img.shields.io/github/license/danieloliveira085/autostarter.svg?style=flat)](https://github.com/danieloliveira085/autostarter/blob/main/LICENSE) 
+[![GoDoc](https://pkg.go.dev/badge/github.com/danieloliveira085/autostarter?status.svg)](https://pkg.go.dev/github.com/danieloliveira085/autostarter?tab=doc)
+[![license](https://img.shields.io/github/license/danieloliveira085/autostarter.svg?style=flat)](https://github.com/danieloliveira085/autostarter/blob/main/LICENSE) 
   
 Autostarter is a Go library that creates a shortcut to run automatically at startup and supports cross-compilation between Windows and Linux 
 
@@ -28,9 +29,9 @@ Construct a new autostart that can be used to access the main functions of the a
 a := autostarter.NewAutostart(
 	autostarter.Shortcut{
 		Name:    "Shortcut name",
-		Exec:    "Exec",
+		Exec:    "Executable",
 		Args:    []string{}, //Arguments, can be empty
-		StartIn: "Path where exec starts",
+		StartIn: "Path where executable starts", //If empty, the root of the executable will be defined as directory
 	},
 	autostarter.DefaultIcon, //Icon, for a custom icon, use SetIcon()
 )
